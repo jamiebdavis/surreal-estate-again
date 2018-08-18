@@ -11,12 +11,9 @@ const NavBar = () => (
   <div>
     <ul className="nav">
       <Link className="item" to="/">View Properties</Link>
-      <Link className="item" to="/add-propety">Add Property</Link>
+      <Link className="item" to="add-property">Add Property</Link>
     </ul>
   </div>
 );
 
 export default NavBar;
-
-
-//<Link className="item" to="/">View Properties</Link>
