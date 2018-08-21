@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/addproperty.css';
+import axios from 'axios';
 
 class AddProperty extends Component {
     state = {
@@ -16,6 +17,15 @@ class AddProperty extends Component {
 
     handleAddProperty = (event) => {
       event.preventDefault();
+
+
+
+      axios.post('http://localhost:3000/api/v1/PropertyListing/', this.state.fields)
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+        });
+
       console.log(this.state.fields);
     };
 
@@ -33,7 +43,7 @@ class AddProperty extends Component {
         <div className="AddProperty">
           <h1>Add Property Page</h1>
           <form onSubmit={this.handleAddProperty}>
-            <input type="text" name="title" value={this.state.fields.title} onChange={this.handleFieldChange} placeholder="Name of Property" />        
+            <input type="text" name="title" value={this.state.fields.title} onChange={this.handleFieldChange} placeholder="Name of Property" />
             <select name="type" value={this.state.fields.type} onChange={this.handleFieldChange} placeholder="Property Type">
               <option value="Flat">Flat</option>
               <option value="Detached">Detached</option>
@@ -50,7 +60,7 @@ class AddProperty extends Component {
 
             <input type="number" name="price" placeholder="Price" value={this.state.fields.price} onChange={this.handleFieldChange} />
 
-            <select name="city" value="" placeholder="City">
+            <select name="city" value={this.state.fields.city} onChange={this.handleFieldChange}>
               <option value="Manchester">Manchester</option>
               <option value="Leeds">Leeds</option>
               <option value="Sheffield">Sheffield</option>
