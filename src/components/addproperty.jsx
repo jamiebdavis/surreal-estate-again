@@ -12,19 +12,28 @@ class AddProperty extends Component {
         price: '',
         city: '',
         email: '',
+        alertMessage: '',
+        isSuccess: false,
+        isError: false,
       },
     };
 
     handleAddProperty = (event) => {
       event.preventDefault();
-
-
+      this.setState =({
+        alertMessage: '',
+        isSuccess: false,
+        isError: false,
+      })
 
       axios.post('http://localhost:3000/api/v1/PropertyListing/', this.state.fields)
         .then(res => {
           console.log(res);
           console.log(res.data);
-        });
+        }).then(() => this.setState({
+          isSuccess: true,
+          alertMessage: "Property added",
+        }))
 
       console.log(this.state.fields);
     };
@@ -70,6 +79,7 @@ class AddProperty extends Component {
             <input type="email" name="email" placeholder="Email" value={this.state.fields.email} onChange={this.handleFieldChange} />
 
             <button type="submit">Add</button>
+            {this.state.isSuccess && <Alert message={this.state.alertMessage} />}
           </form>
         </div>
       );
